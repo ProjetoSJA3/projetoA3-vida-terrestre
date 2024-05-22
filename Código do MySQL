@@ -1,0 +1,23 @@
+create database SDA;
+use SDA;
+
+create table tb_usuario (
+id int primary key auto_increment, 
+login varchar(200), 
+senha varchar(200));
+
+insert into tb_usuario (login, senha)
+values ('admin', 'admin');
+
+create table tb_denuncias (
+id int primary key auto_increment,
+categoria_denuncia varchar(200),
+descricao varchar(9999)
+);
+
+insert into tb_denuncias (categoria_denuncia, descricao)
+values ('Incêndios Florestais', 'Eu estava caminhando pelo parque estadual ontem à tarde quando 
+notei uma fumaça densa no horizonte. As árvores estavam sendo consumidas pelo fogo rapidamente, e os animais pareciam 
+estar fugindo em pânico. Era evidente que o incêndio estava se espalhando de forma descontrolada.');
+
+select * from tb_denuncias;
