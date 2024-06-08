@@ -5,8 +5,16 @@ create table tb_usuario (
 id int primary key auto_increment, 
 login varchar(200), 
 senha varchar(200));
-insert into tb_usuario (login, senha)
-values ('admin', 'admin');
+
+create table tb_admin (
+id int primary key auto_increment,
+usuario_id int,
+login varchar(200), 
+senha varchar(200),
+foreign key (usuario_id) references tb_usuario(id)
+);
+insert into tb_admin (login,senha)
+values ('admin','adminsda');
 
 create table tb_denuncias (
 id int primary key auto_increment,
@@ -14,26 +22,29 @@ estado varchar (200),
 cidade varchar (200),
 referencia varchar (200),
 categoria_denuncia varchar(200),
-descricao varchar(9999)
+descricao varchar(9999),
+usuario_id int,
+admin_id int,
+foreign key (usuario_id) references tb_usuario(id),
+foreign key (admin_id) references tb_admin(id)
 );
-insert into tb_denuncias (estado,cidade,referencia,categoria_denuncia, descricao)
-values ('São Paulo','Campinas','Parque ecológico de Campinas','Incêndios Florestais', 'Eu estava caminhando pelo parque estadual ontem à tarde quando 
-notei uma fumaça densa no horizonte. As árvores estavam sendo consumidas pelo fogo rapidamente, e os animais pareciam 
-estar fugindo em pânico. Era evidente que o incêndio estava se espalhando de forma descontrolada.');
 
 create table tb_cadastro (
 id int primary key auto_increment,
 nome varchar(200),
-numero char(12),
+numero varchar(16),
 email varchar(200)
 );
-insert into tb_cadastro (nome, numero, email)
-values ('João Silva', '1191234-5678', 'joao.silva@SDA.com');
 
-delete from tb_cadastro where id = 14;
+
+delete from tb_usuario where id = 7;
 drop table tb_denuncias;
+drop table tb_cadastro;
+drop table tb_usuario;
+drop table tb_admin;
+select * from tb_usuario;
+select * from tb_admin;
 select * from tb_cadastro;
 select * from tb_denuncias;
-INSERT INTO tb_cadastro (nome) values ("Anônimo");
 
 UPdAtE tb_denuncias set estado = 'a', cidade = 'b', referencia = 'c', categoria_denuncia = 'd', descricao = 'e' WHERE id = 4;
